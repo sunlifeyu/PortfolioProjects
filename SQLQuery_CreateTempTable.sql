@@ -22,13 +22,6 @@ create table #PercentPopulationVaccinated
  RollingPeopleVaccinated numeric
 )
 insert into #PercentPopulationVaccinated
-	--select dea.continent, vac.location, vac.date, dea.population, vac.new_vaccinations
-	--	, sum(vac.new_vaccinations) over (partition by vac.location order by vac.location, vac.date) as RollingPeopleVaccinated
-	--from PortfolioProject..CovidDeaths dea
-	--join PortfolioProject..CovidVaccinations vac
-	--	on dea.location = vac.location
-	--	and dea.date = vac.date
-	--where dea.location is not null
 	select   CD.continent, CV.location, CV.date, CD.population, CV.new_vaccinations
 		, sum(CV.new_vaccinations) over (partition by CV.location order by CV.location, CV.date) as RollingPeopleVaccinated
 	from PortfolioProject..CovidDeaths CD
